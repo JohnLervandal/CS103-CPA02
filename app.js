@@ -299,7 +299,7 @@ app.post('/courses/byInst',
         res.locals.strTimes = courses.strTimes
         res.render('courselist')
     }
-)s
+)
 
 app.post('/courses/byKeyword',
     // show list of courses in a given subject
