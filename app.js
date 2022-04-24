@@ -137,7 +137,7 @@ app.post('/courses/byPublisher',
     // show list of courses in a given subject
     async(req, res, next) => {
         const { subject } = req.body;
-        const games = await Course.find({ Publisher: subject})
+        const games = await Course.find({ Publisher: subject}).sort({Critic_Score: 100})
 
         res.locals.games = games
         res.render('courselist')
