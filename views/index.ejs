@@ -1,23 +1,21 @@
 
 
     <div class="jumbotron">
-        <h1>PA03: Course Finder Fall20-Spr21 </h1>
+        <h1>PA03: Videogme Finder</h1>
         <p></p>
     </div>
 
     <p class="p-3 m-3 border border-primary bg-light">
-        The goal of this assignment is to write an app that will let
-        students pick their courses for the year. Since we don't have 
-        the data for this year (due to workday issues), we will use the 
-        2020-2021 Academic year data. You must signup or login to see
-        the courses and create your schedule.
+        For my Creative Programming Assignment I decided to do a videogame search
+        where people can search for videogames based on their publisher, ratings
+        and reviews to get a better understanding before they buy the game.
     </p>
     
     <% if (true || loggedIn) {%>  
-        <form method="post" action="/courses/bySubject">
-            Show Courses by Subject: 
+        <form method="post" action="/courses/byPublisher">
+            Search For VideoGames by Publisher 
               <input type="text" name="subject" 
-                     placeholder="e.g. COSI">
+                     placeholder="e.g. Nintendo">
             <input type="submit">
         </form>
         <br>

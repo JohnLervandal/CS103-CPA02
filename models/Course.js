@@ -1,30 +1,20 @@
 'use strict';
 const mongoose = require( 'mongoose' );
+const { stringify } = require('querystring');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 const Mixed = Schema.Types.Mixed;
 
 var courseSchema = Schema( {
-    limit: Number,
-    times: Mixed,
-    strTimes: [String],
-    enrolled: Number,
-    details: String,
-    type: String,
-    status_text: String,
-    section: String,
-    waiting: Number,
-    instructor: Mixed,
-    coinstructors: Mixed,
-    code: Mixed,
-    subject: String,
-    coursenum: String,
-    num: Number,
-    suffix: String,
-    name: String,
-    independent_study: Boolean,
-    term: Number,
-    description: String,
+    Name: String,
+    Platform: String,
+    Year_of_Release: Number,
+    Genre: String,
+    Publisher: String,
+    Critic_Score: Number,
+    Developer: String,
+    Rating: String
+
 } );
 
 module.exports = mongoose.model( 'Course', courseSchema );
