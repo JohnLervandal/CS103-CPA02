@@ -1,18 +1,23 @@
 <ul>
-    <% for (course of courses){%>
+    <% for (game of games){%>
+        const name = game['Name']
+        const platform = game['Platform']
+        const yofr = game['Year_of_Release']
+        const genre = game['Genre']
+        const publisher = game['Publisher']
+        const critic = game['Critic_Score']
+        const developer = game['Developer']
+        const rating = game['Rating']
         <li> 
-            <a href="/schedule/remove/<%= course._id %>">X</a>
-            <%= course['subject'] %>
-            <%= course.coursenum %>
-            <%= course.name %>
-            <%= course.term %>
-            
+            <a href="/schedule/remove/<%= game._id %>">X</a>
+        <%=name %> 
+        <%=platform %> 
+        <%=yofr %>
+        <%=genre %>
+        <%=publisher %>
+        <%=critic %>
+        <%=developer %>
+        <%=rating %>
         </li>
     <% } %>
 </ul>
-
-<!--
-    <pre>
-        <%= JSON.stringify(courses,null,5) %>
-    </pre>
--->

@@ -115,8 +115,6 @@ app.get("/about", (req, res, next) => {
 });
 
 
-
-
 /* ************************
   Loading (or reloading) the data into a collection
    ************************ */
@@ -133,7 +131,6 @@ app.get('/upsertDB',
         res.send("data uploaded: " + num)
     }
 )
-
 
 app.post('/games/byPublisher',
     async(req, res, next) => {
@@ -177,13 +174,13 @@ app.get('/courses/show/:courseId',
 
 
 
-app.use(isLoggedIn)
+
 
 app.get('/addCourse/:courseId',
     // add a course to the user's schedule
     async(req, res, next) => {
         try {
-            const courseId = req.params.courseId
+            const courseId = req.params.gameId
             const userId = res.locals.user._id
                 // check to make sure it's not already loaded
             const lookup = await Schedule.find({ courseId, userId })
@@ -230,6 +227,7 @@ app.get('/schedule/remove/:courseId',
     }
 )
 
+app.use(isLoggedIn)
 
 // here we catch 404 errors and forward to error handler
 app.use(function(req, res, next) {
