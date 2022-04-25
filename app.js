@@ -33,8 +33,10 @@ const games = require('./public/data/outwithoutindex.json')
 // *********************************************************** //
 
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config();
 // const mongodb_URI = 'mongodb://localhost:27017/cs103a_todo'
-const mongodb_URI = 'mongodb+srv://johnny:1234@cluster0.lcwl3.mongodb.net/test'
+const mongodb_URI = `${process.env.link}`
 
 mongoose.connect(mongodb_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 // fix deprecation warnings
@@ -134,10 +136,27 @@ app.get('/upsertDB',
 
 
 app.post('/courses/byPublisher',
-    // show list of courses in a given subject
     async(req, res, next) => {
-        const games = await Course.find({ Publisher: subject})
+        const {subject} = req.body;
+        const games = await Course.find({Publisher: subject}).sort({Critic_Score: -1})
+        res.locals.games = games
+        res.render('courselist')
+    }
+)
 
+app.post('/courses/byName',
+    async(req, res, next) => {
+        const {jason} = req.body;
+        var regex = new RegExp(jason, "gi")
+        const games = await Course.find({Name: regex}).sort({Critic_Score: -1})
+        res.locals.games = games
+        res.render('courselist')
+    }
+)
+app.post('/courses/byGenre',
+    async(req, res, next) => {
+        const {genre} = req.body;
+        const games = await Course.find({Genre: genre}).sort({Critic_Score: -1})
         res.locals.games = games
         res.render('courselist')
     }
@@ -166,72 +185,66 @@ app.get('/courses/byInst/:email',
     }
 )
 
-app.post('/E',
-    async(req, res, next) => {
-        const games = await Course.find({ Rating: E})
-        res.locals.games = games
-        res.render('courselist')
-    }
-)
-app.post('/T',
-    async(req, res, next) => {
-        const { T } = req.body;
-        const games = await Course.find({Rating: T})
 
-        res.locals.games = games
-        res.render('courselist')
-    }
-)
-app.post('/M',
-    // show list of courses in a given subject
-    async(req, res, next) => {
-        const { subject } = req.body;
-        const games = await Course.find({Rating: M})
+// app.post('/T',
+//     async(req, res, next) => {
+//         const { T } = req.body;
+//         const games = await Course.find({Rating: T})
 
-        res.locals.games = games
-        res.render('courselist')
-    }
-)
-app.post('/E10+',
-    // show list of courses in a given subject
-    async(req, res, next) => {
-        const { subject } = req.body;
-        const games = await Course.find({Rating: E10})
+//         res.locals.games = games
+//         res.render('courselist')
+//     }
+// )
+// app.post('/M',
+//     // show list of courses in a given subject
+//     async(req, res, next) => {
+//         const { subject } = req.body;
+//         const games = await Course.find({Rating: M})
 
-        res.locals.games = games
-        res.render('courselist')
-    }
-)
-app.post('/AO',
-    // show list of courses in a given subject
-    async(req, res, next) => {
-        const { subject } = req.body;
-        const games = await Course.find({Rating: AO})
+//         res.locals.games = games
+//         res.render('courselist')
+//     }
+// )
+// app.post('/E10+',
+//     // show list of courses in a given subject
+//     async(req, res, next) => {
+//         const { subject } = req.body;
+//         const games = await Course.find({Rating: E10})
 
-        res.locals.games = games
-        res.render('courselist')
-    }
-)
-app.post('/K-A',
-    // show list of courses in a given subject
-    async(req, res, next) => {
-        const { subject } = req.body;
-        const games = await Course.find({Rating: K-A})
+//         res.locals.games = games
+//         res.render('courselist')
+//     }
+// )
+// app.post('/AO',
+//     // show list of courses in a given subject
+//     async(req, res, next) => {
+//         const { subject } = req.body;
+//         const games = await Course.find({Rating: AO})
 
-        res.locals.games = games
-        res.render('courselist')
-    }
-)
-app.post('/RP',
-    // show list of courses in a given subject
-    async(req, res, next) => {
-        const { subject } = req.body;
-        const games = await Course.find({Rating: "RP"})
+//         res.locals.games = games
+//         res.render('courselist')
+//     }
+// )
+// app.post('/K-A',
+//     // show list of courses in a given subject
+//     async(req, res, next) => {
+//         const { subject } = req.body;
+//         const games = await Course.find({Rating: K-A})
 
-        res.locals.games = games
-        res.render('courselist')
-    }
-)
+//         res.locals.games = games
+//         res.render('courselist')
+//     }
+// )
+// app.post('/RP',
+//     // show list of courses in a given subject
+//     async(req, res, next) => {
+//         const { subject } = req.body;
+//         const games = await Course.find({Rating: "RP"})
+
+//         res.locals.games = games
+//         res.render('courselist')
+//     }
+// )
 
 app.post('/courses/byInst',
     // show courses taught by a faculty send from a form

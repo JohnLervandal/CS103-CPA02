@@ -13,34 +13,26 @@
     
     <% if (true || loggedIn) {%>  
         <form method="post" action="/courses/byPublisher">
-            Search For VideoGames by Publisher 
+            Search by Publisher 
               <input type="text" name="subject" 
                      placeholder="e.g. Nintendo">
             <input type="submit">
         </form>
         <br>
-        <form method="post" action="/courses/byInst">
-            Search : 
-            <input type="text" name="email" 
-                   placeholder="e.g. tjhickey">
+        <form method="post" action="/courses/byGenre">
+            Search by Genre
+            <input type="text" name="genre" 
+                   placeholder="e.g. Action">
             <input type="submit">
         </form>
         <br>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              Select A Rating!
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="/E">E</a></li>
-              <li><a class="dropdown-item" href="/T">T</a></li>
-              <li><a class="dropdown-item" href="/M">M</a></li>
-              <li><a class="dropdown-item" href="/E10">E10+</a></li>
-              <li><a class="dropdown-item" href="/AO">AO</a></li>
-              <li><a class="dropdown-item" href="/K-A">K-A</a></li>
-              <li><a class="dropdown-item" href="/RP">RP</a></li>
-
-            </ul>
-          </div>
+        <form method="post" action="/courses/byName">
+            Search by Name
+              <input type="text" name="jason" 
+                     placeholder="e.g. Paper Mario">
+            <input type="submit">
+        </form>
+        
         <a href="/schedule/show">Show Schedule</a>
     <% } %>
 
