@@ -136,8 +136,7 @@ app.get('/upsertDB',
 app.post('/courses/byPublisher',
     // show list of courses in a given subject
     async(req, res, next) => {
-        const { subject } = req.body;
-        const games = await Course.find({ Publisher: subject}).sort({Critic_Score: 100})
+        const games = await Course.find({ Publisher: subject})
 
         res.locals.games = games
         res.render('courselist')
@@ -163,6 +162,73 @@ app.get('/courses/byInst/:email',
         const courses = await Course.find({ instructor: email, independent_study: false })
             //res.json(courses)
         res.locals.courses = courses
+        res.render('courselist')
+    }
+)
+
+app.post('/E',
+    async(req, res, next) => {
+        const games = await Course.find({ Rating: E})
+        res.locals.games = games
+        res.render('courselist')
+    }
+)
+app.post('/T',
+    async(req, res, next) => {
+        const { T } = req.body;
+        const games = await Course.find({Rating: T})
+
+        res.locals.games = games
+        res.render('courselist')
+    }
+)
+app.post('/M',
+    // show list of courses in a given subject
+    async(req, res, next) => {
+        const { subject } = req.body;
+        const games = await Course.find({Rating: M})
+
+        res.locals.games = games
+        res.render('courselist')
+    }
+)
+app.post('/E10+',
+    // show list of courses in a given subject
+    async(req, res, next) => {
+        const { subject } = req.body;
+        const games = await Course.find({Rating: E10})
+
+        res.locals.games = games
+        res.render('courselist')
+    }
+)
+app.post('/AO',
+    // show list of courses in a given subject
+    async(req, res, next) => {
+        const { subject } = req.body;
+        const games = await Course.find({Rating: AO})
+
+        res.locals.games = games
+        res.render('courselist')
+    }
+)
+app.post('/K-A',
+    // show list of courses in a given subject
+    async(req, res, next) => {
+        const { subject } = req.body;
+        const games = await Course.find({Rating: K-A})
+
+        res.locals.games = games
+        res.render('courselist')
+    }
+)
+app.post('/RP',
+    // show list of courses in a given subject
+    async(req, res, next) => {
+        const { subject } = req.body;
+        const games = await Course.find({Rating: "RP"})
+
+        res.locals.games = games
         res.render('courselist')
     }
 )

@@ -13,8 +13,7 @@ var courseSchema = Schema( {
     Publisher: String,
     Critic_Score: Number,
     Developer: String,
-    Rating: String
-
+    Rating: String,
 } );
 
 module.exports = mongoose.model( 'Course', courseSchema );

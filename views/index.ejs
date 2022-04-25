@@ -1,14 +1,14 @@
 
 
     <div class="jumbotron">
-        <h1>PA03: Videogme Finder</h1>
+        <h1>PA03: Videogame Database</h1>
         <p></p>
     </div>
 
     <p class="p-3 m-3 border border-primary bg-light">
         For my Creative Programming Assignment I decided to do a videogame search
-        where people can search for videogames based on their publisher, ratings
-        and reviews to get a better understanding before they buy the game.
+        where people can search for videogames based on their name, publisher, ratings
+        to get a better understanding before they buy the game.
     </p>
     
     <% if (true || loggedIn) {%>  
@@ -26,13 +26,21 @@
             <input type="submit">
         </form>
         <br>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Select A Rating!
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="/E">E</a></li>
+              <li><a class="dropdown-item" href="/T">T</a></li>
+              <li><a class="dropdown-item" href="/M">M</a></li>
+              <li><a class="dropdown-item" href="/E10">E10+</a></li>
+              <li><a class="dropdown-item" href="/AO">AO</a></li>
+              <li><a class="dropdown-item" href="/K-A">K-A</a></li>
+              <li><a class="dropdown-item" href="/RP">RP</a></li>
 
-        <form method="post" action="/courses/byKeyword">
-            Show Courses by Keyword: 
-            <input type="text" name="keyword" 
-                   placeholder="e.g. Python">
-            <input type="submit">
-        </form>
+            </ul>
+          </div>
         <a href="/schedule/show">Show Schedule</a>
     <% } %>
 
