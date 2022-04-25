@@ -5,29 +5,29 @@
         <p></p>
     </div>
 
-    <p class="p-3 m-3 border border-primary bg-light">
+    <p class="p-3 m-3 border border-primary bg-light" style = "background-color: blanchedalmond;">
         For my Creative Programming Assignment I decided to do a videogame search
         where people can search for videogames based on their name, publisher, ratings
         to get a better understanding before they buy the game.
     </p>
     
     <% if (true || loggedIn) {%>  
-        <form method="post" action="/courses/byPublisher">
-            Search by Publisher 
+        <form method="post" action="/games/byPublisher">
+            <b>Search by Publisher </b>
               <input type="text" name="subject" 
                      placeholder="e.g. Nintendo">
             <input type="submit">
         </form>
         <br>
-        <form method="post" action="/courses/byGenre">
-            Search by Genre
+        <form method="post" action="/games/byGenre">
+            <b>Search by Genre</b>
             <input type="text" name="genre" 
                    placeholder="e.g. Action">
             <input type="submit">
         </form>
         <br>
-        <form method="post" action="/courses/byName">
-            Search by Name
+        <form method="post" action="/game/byName">
+            <b>Search by Name</b>
               <input type="text" name="jason" 
                      placeholder="e.g. Paper Mario">
             <input type="submit">

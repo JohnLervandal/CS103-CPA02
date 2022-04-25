@@ -135,7 +135,7 @@ app.get('/upsertDB',
 )
 
 
-app.post('/courses/byPublisher',
+app.post('/games/byPublisher',
     async(req, res, next) => {
         const {subject} = req.body;
         const games = await Course.find({Publisher: subject}).sort({Critic_Score: -1})
@@ -144,7 +144,7 @@ app.post('/courses/byPublisher',
     }
 )
 
-app.post('/courses/byName',
+app.post('/games/byName',
     async(req, res, next) => {
         const {jason} = req.body;
         var regex = new RegExp(jason, "gi")
@@ -153,7 +153,7 @@ app.post('/courses/byName',
         res.render('courselist')
     }
 )
-app.post('/courses/byGenre',
+app.post('/games/byGenre',
     async(req, res, next) => {
         const {genre} = req.body;
         const games = await Course.find({Genre: genre}).sort({Critic_Score: -1})
@@ -174,105 +174,8 @@ app.get('/courses/show/:courseId',
     }
 )
 
-app.get('/courses/byInst/:email',
-    // show a list of all courses taught by a given faculty
-    async(req, res, next) => {
-        const email = req.params.email + "@brandeis.edu";
-        const courses = await Course.find({ instructor: email, independent_study: false })
-            //res.json(courses)
-        res.locals.courses = courses
-        res.render('courselist')
-    }
-)
 
 
-// app.post('/T',
-//     async(req, res, next) => {
-//         const { T } = req.body;
-//         const games = await Course.find({Rating: T})
-
-//         res.locals.games = games
-//         res.render('courselist')
-//     }
-// )
-// app.post('/M',
-//     // show list of courses in a given subject
-//     async(req, res, next) => {
-//         const { subject } = req.body;
-//         const games = await Course.find({Rating: M})
-
-//         res.locals.games = games
-//         res.render('courselist')
-//     }
-// )
-// app.post('/E10+',
-//     // show list of courses in a given subject
-//     async(req, res, next) => {
-//         const { subject } = req.body;
-//         const games = await Course.find({Rating: E10})
-
-//         res.locals.games = games
-//         res.render('courselist')
-//     }
-// )
-// app.post('/AO',
-//     // show list of courses in a given subject
-//     async(req, res, next) => {
-//         const { subject } = req.body;
-//         const games = await Course.find({Rating: AO})
-
-//         res.locals.games = games
-//         res.render('courselist')
-//     }
-// )
-// app.post('/K-A',
-//     // show list of courses in a given subject
-//     async(req, res, next) => {
-//         const { subject } = req.body;
-//         const games = await Course.find({Rating: K-A})
-
-//         res.locals.games = games
-//         res.render('courselist')
-//     }
-// )
-// app.post('/RP',
-//     // show list of courses in a given subject
-//     async(req, res, next) => {
-//         const { subject } = req.body;
-//         const games = await Course.find({Rating: "RP"})
-
-//         res.locals.games = games
-//         res.render('courselist')
-//     }
-// )
-
-app.post('/courses/byInst',
-    // show courses taught by a faculty send from a form
-    async(req, res, next) => {
-        const email = req.body.email + "@brandeis.edu";
-        const courses =
-            await Course
-            .find({ instructor: email, independent_study: false })
-            .sort({ term: 1, num: 1, section: 1 })
-            //res.json(courses)
-        res.locals.courses = courses
-        res.locals.strTimes = courses.strTimes
-        res.render('courselist')
-    }
-)
-
-app.post('/courses/byKeyword',
-    // show list of courses in a given subject
-    async(req, res, next) => {
-        const { keyword } = req.body;
-        var regex = new RegExp(keyword, "gi")
-        const courses = await Course.find({name: regex}, {independent_study: false }).sort({ term: 1, num: 1, section: 1 })
-        res.locals.courses = courses
-        res.locals.strTimes = courses.strTimes
-            //res.json(courses)
-        res.render('courselist')
-    }
-)
 
 app.use(isLoggedIn)
 
