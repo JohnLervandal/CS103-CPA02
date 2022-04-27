@@ -135,7 +135,8 @@ app.get('/upsertDB',
 app.post('/games/byPublisher',
     async(req, res, next) => {
         const {subject} = req.body;
-        const games = await Course.find({Publisher: subject}).sort({Critic_Score: -1})
+        var regex = new RegExp(subject, "gi")
+        const games = await Course.find({Publisher: regex}).sort({Critic_Score: -1})
         res.locals.games = games
         res.render('courselist')
     }
@@ -153,79 +154,20 @@ app.post('/games/byName',
 app.post('/games/byGenre',
     async(req, res, next) => {
         const {genre} = req.body;
-        const games = await Course.find({Genre: genre}).sort({Critic_Score: -1})
+        var regex = new RegExp(genre, "gi")
+        const games = await Course.find({Genre: regex}).sort({Critic_Score: -1})
         res.locals.games = games
         res.render('courselist')
     }
 )
 
-app.get('/courses/show/:courseId',
-    // show all info about a course given its courseid
-    async(req, res, next) => {
-        const { courseId } = req.params;
-        const course = await Course.findOne({ _id: courseId })
-        res.locals.course = course
-        res.locals.strTimes = courses.strTimes
-            //res.json(course)
-        res.render('course')
-    }
-)
 
 
 
 
 
 
-app.get('/addCourse/:courseId',
-    // add a course to the user's schedule
-    async(req, res, next) => {
-        try {
-            const courseId = req.params.gameId
-            const userId = res.locals.user._id
-                // check to make sure it's not already loaded
-            const lookup = await Schedule.find({ courseId, userId })
-            if (lookup.length == 0) {
-                const schedule = new Schedule({ courseId, userId })
-                await schedule.save()
-            }
-            res.redirect('/schedule/show')
-        } catch (e) {
-            next(e)
-        }
-    })
 
-app.get('/schedule/show',
-    // show the current user's schedule
-    async(req, res, next) => {
-        try {
-            const userId = res.locals.user._id;
-            const courseIds =
-                (await Schedule.find({ userId }))
-                .sort(x => x.term)
-                .map(x => x.courseId)
-            res.locals.courses = await Course.find({ _id: { $in: courseIds } })
-            res.render('schedule')
-        } catch (e) {
-            next(e)
-        }
-    }
-)
-
-app.get('/schedule/remove/:courseId',
-    // remove a course from the user's schedule
-    async(req, res, next) => {
-        try {
-            await Schedule.remove({
-                userId: res.locals.user._id,
-                courseId: req.params.courseId
-            })
-            res.redirect('/schedule/show')
-
-        } catch (e) {
-            next(e)
-        }
-    }
-)
 
 app.use(isLoggedIn)
 
