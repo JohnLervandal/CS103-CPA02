@@ -6,6 +6,7 @@ Much of today's software development involves working database-backed responsive
 This is a starter project which has a simple authentication module 
 and provides access to a mongoose database in the cloud.
 
+Zoom Link: https://brandeis.zoom.us/rec/share/b3RjgdEWBtXSN9h1VDUuIx1eJLMxvYl-DeK8tHJk1E9eln6sNOLNkJDdWx6EDhhi.nFT7mGr3JGCGykqD?startTime=1651073856000
 ## Installation
 Download the project from github and download nodejs and npm from https://nodejs.org
 and cd into the folder
